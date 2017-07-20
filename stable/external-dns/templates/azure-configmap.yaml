@@ -1,0 +1,12 @@
+{{ if .Values.azureConfig -}}
+---
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: {{ template "external-dns.fullname" . }}-azure-config
+  labels: {{ include "external-dns.labels" . | indent 4 }}
+    chart: "{{ .Chart.Name }}-{{ .Chart.Version | replace "+" "_" }}"
+data:
+    config.json: |
+{{ toJson .Values.azureConfig | indent 6 }}
+{{- end }}

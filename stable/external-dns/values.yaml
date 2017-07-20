@@ -36,6 +36,9 @@ provider: aws
 ## When using the Azure provider, override the Azure resource group to use (optional)
 # azureResourceGroup:
 
+# 
+# azureConfig: 
+
 ## Modify how DNS records are sychronized between sources and providers (options: sync, upsert-only )
 policy: upsert-only
 
