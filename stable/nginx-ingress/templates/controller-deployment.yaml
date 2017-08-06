@@ -23,9 +23,9 @@ spec:
         release: {{ .Release.Name }}
     spec:
       hostNetwork: {{ .Values.controller.hostNetwork }}
-    {{- if .Values.controller.serviceAccountName }}
-      serviceAccountName: {{ .Values.controller.serviceAccountName }}
-    {{- end }}
+      {{- if or ( .Values.rbac.create ) ( .Values.controller.serviceAccountName ) }}
+      serviceAccountName: {{ if .Values.rbac.create }}{{ template "fullname" . }}{{ else }}"{{ .Values.controller.serviceAccountName }}"{{ end }}
+      {{- end }}
       containers:
         - name: {{ template "name" . }}-{{ .Values.controller.name }}
           image: "{{ .Values.controller.image.repository }}:{{ .Values.controller.image.tag }}"

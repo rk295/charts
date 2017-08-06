@@ -113,6 +113,7 @@ Parameter | Description | Default
 `statsExporter.service.type` | type of Prometheus metrics exporter service to create | `ClusterIP`
 `tcp` | TCP service key:value pairs | `{}`
 `udp` | UDP service key:value pairs | `{}`
+`rbac.create` | Enable creation of RBAC resources. Boolean. | ``
 
 ```console
 $ helm install stable/nginx-ingress --name my-release \

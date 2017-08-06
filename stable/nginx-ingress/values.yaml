@@ -194,6 +194,11 @@ statsExporter:
     servicePort: 9913
     type: ClusterIP
 
+rbac:
+  ## If true, create & use RBAC resources
+  ##
+  create: false
+
 # TCP service key:value pairs
 # Ref: https://github.com/kubernetes/contrib/tree/master/ingress/controllers/nginx/examples/tcp
 ##
