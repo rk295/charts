@@ -107,7 +107,7 @@ spec:
             {{- end }}
             readOnly: true
           {{- end }}
-          {{- if (and .Values.aws.secretKey .Values.aws.accessKey) }}
+          {{- if or (and .Values.aws.secretKey .Values.aws.accessKey) .Values.aws.roleArn }}
           - name: aws-credentials
             mountPath: {{ .Values.aws.credentialsPath }}
             readOnly: true
@@ -208,7 +208,7 @@ spec:
           secretName: {{.Values.azure.secretName}}
         {{- end}}
       {{- end }}
-      {{- if (and .Values.aws.secretKey .Values.aws.accessKey) }}
+      {{- if or (and .Values.aws.secretKey .Values.aws.accessKey) .Values.aws.roleArn }}
       - name: aws-credentials
         secret:
           secretName: {{ template "external-dns.fullname" . }}
