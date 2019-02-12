@@ -9,34 +9,6 @@ metadata:
     app.kubernetes.io/managed-by: {{ .Release.Service }}
 data:
   gangway.yaml: |
-    {{- if .Values.gangway.httpPath }}
-    allowEmptyClientSecret: {{ .Values.gangway.allowEmptyClientSecret }}
-    {{- end }}
-    apiServerURL: {{ .Values.gangway.apiServerURL }}
-    audience: {{ .Values.gangway.audience }}
-    authorizeURL: {{ .Values.gangway.authorizeURL }}
-    certFile: {{ .Values.gangway.certPath }}/tls.crt
-    clientID: {{ .Values.gangway.clientID }}
-    clientSecret: {{ .Values.gangway.clientSecret }}
-    clusterName: {{ .Values.gangway.clusterName }}
-    {{- if .Values.gangway.clusterCAPath }}
-    cluster_ca_path: {{ .Values.gangway.clusterCAPath }}
-    {{- end }}
-    {{- if .Values.gangway.host }}
-    host: {{ .Values.gangway.host }}
-    {{- end }}
-    httpPath: {{ .Values.gangway.httpPath }}
-    keyFile: {{ .Values.gangway.certPath }}/tls.key
-    port: {{ .Values.gangway.port }}
-    redirectURL: {{ .Values.gangway.redirectURL }}
-    serveTLS: {{ .Values.gangway.serveTLS }}
-    scopes: {{ .Values.gangway.scopes }}
-    tokenURL: {{ .Values.gangway.tokenURL }}
-    {{- if .Values.gangway.trustedCAPath }}
-    trustedCAPath: {{ .Values.gangway.trustedCAPath }}
-    {{- end }}
-    usernameClaim: {{ .Values.gangway.usernameClaim }}
-
-
+    {{- .Values.gangway | toYaml | nindent 4 }}
 
 
