@@ -1,0 +1,121 @@
+replicaCount: 1
+
+image:
+  repository: gcr.io/heptio-images/gangway
+  tag: v2.2.0
+  pullPolicy: IfNotPresent
+
+nameOverride: ""
+fullnameOverride: ""
+
+gangway:
+  # Some identity providers accept an empty client secret, this
+  # is not generally considered a good idea. If you have to use an
+  # empty secret and accept the risks that come with that then you can
+  # set this to true.
+  allowEmptyClientSecret: false
+
+  # The API server endpoint used to configure kubectl
+  apiServerURL: ""
+
+  # Endpoint that provides user profile information [optional]. Not all providers
+  # will require this.
+  audience: ""
+
+  # OAuth2 URL to start authorization flow.
+  authorizeURL: ""
+  
+  # The Public cert data. This is normally safe to leave alone.
+  # certData: 
+  
+  # The public cert file (including root and intermediates) to use when serving TLS.
+  certPath: /etc/gangway/tls
+
+  # API client ID as indicated by the identity provider
+  clientID: ""
+
+  # API client secret as indicated by the identity provider
+  clientSecret: ""
+
+  # The path to find the CA bundle for the API server. Used to configure kubectl.
+  # This is typically mounted into the default location for workloads running on
+  # a Kubernetes cluster and doesn't need to be set.
+  # clusterCAPath:
+
+  # The cluster name. Used in UI and kubectl config instructions.
+  clusterName: ""
+
+  # The address to listen on. Defaults to 0.0.0.0 to listen on all interfaces.
+  # host:
+
+  # The path gangway uses to create urls (defaults to "")
+  httpPath: /
+
+  # The Private key data
+  # keyData:
+
+  # The port to listen on. Defaults to 8080.
+  port: 80
+
+  # Where to redirect back to. This should be a URL where gangway is reachable.
+  # Typically this also needs to be registered as part of the oauth application
+  # with the oAuth provider.
+
+  redirectURL: ""
+
+  # Used to specify the scope of the requested Oauth authorization.
+  scopes: 
+    - openid
+    - profile
+    - email
+    - offline_access
+
+  # Should Gangway serve TLS vs. plain HTTP?
+  serveTLS: false
+
+
+  # OAuth2 URL to obtain access tokens.
+  tokenURL: ""
+
+  # The path to a root CA to trust for self signed certificates at the Oauth2 URLs
+  # trustedCAPath:
+
+  # The JWT claim to use as the username. This is used in UI.
+  # Default is "nickname". This is combined with the clusterName
+  # for the "user" portion of the kubeconfig.
+  usernameClaim: name
+
+service:
+  type: ClusterIP
+  port: 80
+
+ingress:
+  enabled: false
+  annotations: {}
+    # kubernetes.io/ingress.class: nginx
+    # kubernetes.io/tls-acme: "true"
+  path: /
+  hosts:
+    - chart-example.local
+  tls: []
+  #  - secretName: chart-example-tls
+  #    hosts:
+  #      - chart-example.local
+
+resources: {}
+  # We usually recommend not to specify default resources and to leave this as a conscious
+  # choice for the user. This also increases chances charts run on environments with little
+  # resources, such as Minikube. If you do want to specify resources, uncomment the following
+  # lines, adjust them as necessary, and remove the curly braces after 'resources:'.
+  # limits:
+  #  cpu: 100m
+  #  memory: 128Mi
+  # requests:
+  #  cpu: 100m
+  #  memory: 128Mi
+
+nodeSelector: {}
+
+tolerations: []
+
+affinity: {}
