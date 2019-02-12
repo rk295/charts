@@ -1,3 +1,9 @@
+# TODO
+
+Allow provision of this option to the external-dns container:
+
+`--aws-assume-role parameter`
+
 # external-dns
 
 ## Chart Details
